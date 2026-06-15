@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="StreamVibe premium video streaming interface">
+    <title>StreamVibe | Premium Streaming Platform</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="style.css?v=1.3" rel="stylesheet">
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+
+    <nav class="navbar navbar-expand-lg fixed-top app-navbar" aria-label="Primary navigation">
+      <div class="container-fluid px-3 px-lg-4">
+        <button class="btn icon-btn d-lg-none me-2" id="sidebarToggle" type="button" aria-label="Open menu" aria-controls="appSidebar">
+          <i class="bi bi-list"></i>
+        </button>
+        <a class="navbar-brand brand-mark" href="#home" aria-label="StreamVibe home">
+          <span class="brand-icon"><i class="bi bi-play-fill"></i></span>
+          StreamVibe
+        </a>
+
+        <form class="search-shell mx-lg-4 d-none d-md-flex" role="search" id="desktopSearchForm">
+          <label class="visually-hidden" for="desktopSearchInput">Search videos</label>
+          <i class="bi bi-search" aria-hidden="true"></i>
+          <input id="desktopSearchInput" class="form-control" type="search" placeholder="Search videos, creators, playlists" autocomplete="off">
+          <button class="btn btn-accent" type="submit">Search</button>
+        </form>
+
+        <div class="nav-actions ms-auto">
+          <button class="btn icon-btn d-md-none" type="button" data-bs-toggle="modal" data-bs-target="#searchModal" aria-label="Open search">
+            <i class="bi bi-search"></i>
+          </button>
+          <button class="btn icon-btn" id="themeToggle" type="button" aria-label="Toggle light mode">
+            <i class="bi bi-sun"></i>
+          </button>
+          <div class="dropdown">
+            <button class="btn icon-btn notification-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+              <i class="bi bi-bell"></i>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end notification-menu p-0">
+              <div class="dropdown-header">Notifications</div>
+              <div id="notificationList"></div>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="btn profile-chip" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="User menu">
+              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80" alt="Alex Morgan profile picture">
+              <span class="d-none d-sm-inline">Alex</span>
+              <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item nav-link-route" href="#profile"><i class="bi bi-person"></i> Profile</a></li>
+              <li><a class="dropdown-item nav-link-route" href="#dashboard"><i class="bi bi-speedometer2"></i> Creator Studio</a></li>
+              <li><button class="dropdown-item" type="button"><i class="bi bi-gear"></i> Settings</button></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item nav-link-route" href="#login"><i class="bi bi-box-arrow-right"></i> Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <aside class="app-sidebar" id="appSidebar" aria-label="Sidebar navigation">
+      <div class="sidebar-inner">
+        <a class="sidebar-link nav-link-route active" href="#home" data-route="home"><i class="bi bi-house"></i><span>Home</span></a>
+        <a class="sidebar-link nav-link-route" href="#watch" data-route="watch"><i class="bi bi-play-circle"></i><span>Watch</span></a>
+        <a class="sidebar-link nav-link-route" href="#profile" data-route="profile"><i class="bi bi-person-video2"></i><span>Profile</span></a>
+        <a class="sidebar-link nav-link-route" href="#dashboard" data-route="dashboard"><i class="bi bi-bar-chart"></i><span>Studio</span></a>
+        <a class="sidebar-link nav-link-route" href="#login" data-route="login"><i class="bi bi-shield-lock"></i><span>Login</span></a>
+      </div>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebarBackdrop" tabindex="-1" aria-hidden="true"></div>
+
+    <main id="mainContent" class="main-shell" tabindex="-1">
+      <section id="homePage" class="page-view active" aria-labelledby="homeHeading">
+        <div class="hero-banner">
+          <div class="hero-media" role="img" aria-label="Featured sci-fi city streaming show"></div>
+          <div class="hero-content">
+            <span class="eyebrow"><i class="bi bi-stars"></i> Featured Original</span>
+            <h1 id="homeHeading">Neon Horizon</h1>
+            <p>A cinematic future-noir series where hackers, pilots, and dreamers fight for control of the last free city.</p>
+            <div class="hero-actions">
+              <a class="btn btn-accent btn-lg" href="#watch"><i class="bi bi-play-fill"></i> Watch Now</a>
+              <button class="btn btn-ghost btn-lg" type="button"><i class="bi bi-plus-lg"></i> My List</button>
+            </div>
+          </div>
+        </div>
+
+        <section class="content-section" aria-labelledby="categoryHeading">
+          <div class="section-header">
+            <h2 id="categoryHeading">Browse Categories</h2>
+          </div>
+          <div class="category-row" id="categoryFilters" role="list" aria-label="Video categories"></div>
+        </section>
+
+        <section class="content-section" aria-labelledby="trendingHeading">
+          <div class="section-header">
+            <h2 id="trendingHeading">Trending Now</h2>
+            <a href="#watch" class="text-link">Open player</a>
+          </div>
+          <div class="video-grid" id="trendingGrid"></div>
+        </section>
+
+        <section class="content-section" aria-labelledby="recommendedHeading">
+          <div class="section-header">
+            <h2 id="recommendedHeading">Recommended For You</h2>
+            <span class="muted-label" id="resultCount"></span>
+          </div>
+          <div class="video-grid" id="recommendedGrid"></div>
+          <div class="text-center mt-4">
+            <button class="btn btn-outline-light" id="loadMoreBtn" type="button">Load more videos</button>
+          </div>
+        </section>
+      </section>
+
+      <section id="watchPage" class="page-view" aria-labelledby="watchTitle">
+        <nav aria-label="breadcrumb" class="breadcrumb-shell">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Watch</li>
+          </ol>
+        </nav>
+        <div class="watch-layout">
+          <article class="watch-main">
+            <div class="video-player" aria-label="Video player">
+              <img id="watchPoster" src="" alt="">
+              <button class="player-play" type="button" aria-label="Play video"><i class="bi bi-play-fill"></i></button>
+              <div class="player-controls" aria-hidden="true">
+                <span>00:18</span>
+                <div class="progress"><div class="progress-bar" style="width: 38%"></div></div>
+                <span id="watchDuration">12:48</span>
+              </div>
+            </div>
+            <h1 id="watchTitle" class="watch-title"></h1>
+            <div class="watch-meta">
+              <span id="watchViews"></span>
+              <div class="watch-actions" role="group" aria-label="Video actions">
+                <button class="btn action-pill" id="likeBtn" type="button"><i class="bi bi-hand-thumbs-up"></i> <span>Like</span></button>
+                <button class="btn action-pill" id="dislikeBtn" type="button"><i class="bi bi-hand-thumbs-down"></i> <span>Dislike</span></button>
+                <button class="btn action-pill" id="shareBtn" type="button"><i class="bi bi-share"></i> <span>Share</span></button>
+                <button class="btn action-pill" id="saveBtn" type="button"><i class="bi bi-bookmark-plus"></i> <span>Save</span></button>
+              </div>
+            </div>
+            <div class="creator-card">
+              <img id="creatorAvatar" src="" alt="">
+              <div>
+                <h2 id="creatorName"></h2>
+                <p id="creatorStats"></p>
+              </div>
+              <button class="btn btn-accent ms-auto" id="subscribeBtn" type="button">Subscribe</button>
+            </div>
+            <section class="description-box" aria-labelledby="descriptionHeading">
+              <h2 id="descriptionHeading">Description</h2>
+              <p id="watchDescription"></p>
+            </section>
+            <section class="comments-section" aria-labelledby="commentsHeading">
+              <h2 id="commentsHeading">Comments</h2>
+              <form class="comment-form" id="commentForm">
+                <label class="visually-hidden" for="commentInput">Add a comment</label>
+                <input class="form-control" id="commentInput" placeholder="Add a respectful comment" required>
+                <button class="btn btn-accent" type="submit">Post</button>
+              </form>
+              <div id="commentsList" class="comment-list"></div>
+            </section>
+          </article>
+          <aside class="related-sidebar" aria-labelledby="relatedHeading">
+            <h2 id="relatedHeading">Related Videos</h2>
+            <div id="relatedList"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="profilePage" class="page-view" aria-labelledby="profileHeading">
+        <nav aria-label="breadcrumb" class="breadcrumb-shell">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+          </ol>
+        </nav>
+        <div class="profile-cover">
+          <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1600&q=80" alt="">
+        </div>
+        <header class="profile-header">
+          <img class="profile-avatar-xl" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=220&q=80" alt="Alex Morgan">
+          <div>
+            <h1 id="profileHeading">Alex Morgan</h1>
+            <p>Filmmaker, tech reviewer, and curator of beautifully strange internet cinema.</p>
+            <strong>1.8M subscribers</strong>
+          </div>
+          <button class="btn btn-outline-light ms-lg-auto" type="button"><i class="bi bi-pencil"></i> Edit Profile</button>
+        </header>
+        <ul class="nav nav-pills profile-tabs" id="profileTabs" role="tablist">
+          <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#uploadsTab" type="button">Uploaded videos</button></li>
+          <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#playlistsTab" type="button">Playlists</button></li>
+          <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#historyTab" type="button">Watch history</button></li>
+          <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#settingsTab" type="button">Settings</button></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="uploadsTab"><div class="video-grid" id="profileUploads"></div></div>
+          <div class="tab-pane fade" id="playlistsTab"><div class="playlist-grid" id="playlistGrid"></div></div>
+          <div class="tab-pane fade" id="historyTab"><div class="video-grid" id="historyGrid"></div></div>
+          <div class="tab-pane fade" id="settingsTab">
+            <form class="settings-form needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label">Display name</label><input class="form-control" value="Alex Morgan" required></div>
+                <div class="col-md-6"><label class="form-label">Email</label><input class="form-control" type="email" value="alex@streamvibe.test" required></div>
+                <div class="col-12"><label class="form-label">Bio</label><textarea class="form-control" rows="4">Filmmaker, tech reviewer, and curator.</textarea></div>
+                <div class="col-12"><button class="btn btn-accent" type="submit">Save settings</button></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboardPage" class="page-view" aria-labelledby="dashboardHeading">
+        <nav aria-label="breadcrumb" class="breadcrumb-shell">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Creator Dashboard</li>
+          </ol>
+        </nav>
+        <div class="section-header dashboard-heading">
+          <h1 id="dashboardHeading">Creator Dashboard</h1>
+          <button class="btn btn-accent" type="button"><i class="bi bi-cloud-arrow-up"></i> Upload Video</button>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card"><i class="bi bi-eye"></i><span>Total Views</span><strong>24.8M</strong></div>
+          <div class="stat-card"><i class="bi bi-people"></i><span>Subscribers</span><strong>1.8M</strong></div>
+          <div class="stat-card"><i class="bi bi-film"></i><span>Videos Uploaded</span><strong>286</strong></div>
+          <div class="stat-card"><i class="bi bi-cash-stack"></i><span>Revenue</span><strong>$82.4K</strong></div>
+        </div>
+        <div class="dashboard-grid">
+          <section class="panel" aria-labelledby="analyticsHeading">
+            <h2 id="analyticsHeading">Audience Analytics</h2>
+            <canvas id="viewsChart" height="150" aria-label="Views and subscribers chart"></canvas>
+          </section>
+          <section class="panel" aria-labelledby="categoryChartHeading">
+            <h2 id="categoryChartHeading">Category Reach</h2>
+            <canvas id="categoryChart" height="150" aria-label="Category reach chart"></canvas>
+          </section>
+        </div>
+        <section class="panel table-panel" aria-labelledby="recentUploadsHeading">
+          <h2 id="recentUploadsHeading">Recent Uploads</h2>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead><tr><th>Video</th><th>Views</th><th>Status</th><th>Date</th></tr></thead>
+              <tbody id="recentUploadsTable"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="panel table-panel" aria-labelledby="manageVideosHeading">
+          <h2 id="manageVideosHeading">Video Management</h2>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead><tr><th>Title</th><th>Category</th><th>Visibility</th><th>Actions</th></tr></thead>
+              <tbody id="managementTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section id="loginPage" class="page-view auth-page" aria-labelledby="loginHeading"></section>
+      <section id="registerPage" class="page-view auth-page" aria-labelledby="registerHeading"></section>
+      <section id="forgotPage" class="page-view auth-page" aria-labelledby="forgotHeading"></section>
+    </main>
+
+    <footer class="app-footer">
+      <div>
+        <a class="brand-mark" href="#home"><span class="brand-icon"><i class="bi bi-play-fill"></i></span>StreamVibe</a>
+        <p>Premium stories, live moments, creator tools, and personal discovery in one polished experience.</p>
+      </div>
+      <nav aria-label="Footer links">
+        <a href="#home">Home</a>
+        <a href="#dashboard">Creators</a>
+        <a href="#login">Account</a>
+        <a href="#profile">Community</a>
+      </nav>
+      <div class="social-links" aria-label="Social media">
+        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+      </div>
+    </footer>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-5" id="searchModalLabel">Search StreamVibe</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="modalSearchForm" role="search">
+              <label class="visually-hidden" for="modalSearchInput">Search videos</label>
+              <input id="modalSearchInput" class="form-control form-control-lg" type="search" placeholder="Search videos or creators">
+            </form>
+            <div id="modalSearchResults" class="search-results mt-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="appToast" class="toast" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-body"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="script.js?v=1.2"></script>
+  </body>
+</html>
